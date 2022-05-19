@@ -12,4 +12,9 @@ export class ButtonComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  alert(evento: any){
+    alert("Hello Angular")
+    console.log('no click vem escrito: ', evento.pointerType);
+  }
+
 }
