@@ -1,21 +1,25 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Course } from './course';
 
 @Injectable ({
     providedIn: 'root'
 })
 export class CourseListService{
+static retrieveById: any;
+
 
 retrieveAll(): Course[] {
     return COURSES;
 }
-
+retrieveById(id: number): Course { 
+    return COURSES.find((courseItereator: Course) => courseItereator.id === id)!;
 }
-
+}
 var COURSES: Course[] = [
  {
     id: 1,
-    nome: 'Angular:CLI',
+    name: 'Angular:CLI',
     releaseDate: new Date() ,
     description: 'Nesse curso os alunos irão obter um conhecimento aprofundado sobre os recursos disponiveis no modulo de CLI',
     duration : 80,
@@ -26,7 +30,7 @@ var COURSES: Course[] = [
 },
 {
     id: 2,
-    nome: 'Angular: Forms',
+    name: 'Angular: Forms',
     releaseDate: new Date() ,
     description: 'Nesse curso os alunos irão obter um conhecimento aprofundado sobre os recursos disponiveis no modulo de HTTP',
     duration : 60,
@@ -39,7 +43,7 @@ var COURSES: Course[] = [
 
 {
     id: 3,
-    nome: 'Angular:http',
+    name: 'Angular:http',
     releaseDate: new Date() ,
     description: 'Nesse curso os alunos irão obter um conhecimento aprofundado sobre os recursos disponiveis no modulo de HTTP',
     duration : 80,
@@ -50,7 +54,7 @@ var COURSES: Course[] = [
 },
 {
     id: 4,
-    nome: 'Angular:Router',
+    name: 'Angular:Router',
     releaseDate: new Date() ,
     description: 'Nesse curso os alunos irão obter um conhecimento aprofundado sobre os recursos disponiveis no modulo de HTTP',
     duration : 90,
@@ -61,7 +65,7 @@ var COURSES: Course[] = [
 },
 {
     id: 5,
-    nome: 'Angular:Animations',
+    name: 'Angular:Animations',
     releaseDate: new Date() ,
     description: 'Nesse curso os alunos irão obter um conhecimento aprofundado sobre os recursos disponiveis no modulo de HTTP',
     duration : 70,

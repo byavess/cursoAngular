@@ -1,6 +1,7 @@
 import { CourseListService } from './course-list-service';
 import { Component, OnInit} from '@angular/core';
 import { Course } from './course';
+import {ActivatedRoute} from '@angular/router';
 
 @Component ({
      //selector: 'course-list',
@@ -22,7 +23,7 @@ export class CouseListComponent implements OnInit {
         this._filterBy = value;
 
         this.filteredCouses = this._courses.filter((course:Course) => 
-        course.nome.toLocaleLowerCase().indexOf(this._filterBy.toLocaleLowerCase()) > -1);
+        course.name.toLocaleLowerCase().indexOf(this._filterBy.toLocaleLowerCase()) > -1);
 
 
     }
