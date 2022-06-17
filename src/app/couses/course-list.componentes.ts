@@ -1,7 +1,7 @@
 import { CourseListService } from './course-list-service';
 import { Component, OnInit} from '@angular/core';
 import { Course } from './course';
-import {ActivatedRoute} from '@angular/router';
+
 
 @Component ({
      //selector: 'course-list',
@@ -15,24 +15,37 @@ export class CouseListComponent implements OnInit {
     constructor(private courseListService: CourseListService, ){ }
 
     ngOnInit(): void {
-        this._courses = this.courseListService.retrieveAll();   
-        this.filteredCouses= this._courses;
-       
-    }   
-    set filter (value : string){
+        this.retrieveAll();
+    }
+
+    retrieveAll(): void { 
+        this.courseListService.retrieveAll().subscribe({
+            next: courses => {
+                this._courses = courses;
+                this.filteredCouses = this._courses;
+            },
+            error: err => console.log('Error', err) 
+        })
+    }
+
+    deleteById(courseId: number): void { 
+        this.courseListService.deleteById(courseId).subscribe({
+            next: () => { 
+                console.log('Deleted with success');
+                this.retrieveAll();
+            },
+            error: err => console.log('Error', err)
+        })
+    }
+
+    set filter (value: string) { 
         this._filterBy = value;
 
-        this.filteredCouses = this._courses.filter((course:Course) => 
-        course.name.toLocaleLowerCase().indexOf(this._filterBy.toLocaleLowerCase()) > -1);
-
-
+        this.filteredCouses = this._courses.filter((course: Course) => course.name.toLocaleLowerCase().indexOf(this._filterBy.toLocaleLowerCase()) > -1);
     }
-get filter () {
-return this._filterBy;
-}
-} 
 
-function course(course: any, Course: any): Course[] {
-    throw new Error('Function not implemented.');
-}
+    get filter() { 
+        return this._filterBy;
+    };
 
+};

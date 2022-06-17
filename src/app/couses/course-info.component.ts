@@ -12,7 +12,16 @@ import { Course } from "./course";
 
         constructor(private activatedRoute: ActivatedRoute, private courseListService: CourseListService) { }
         ngOnInit(): void{
-            this.course=this.courseListService.retrieveById(+this.activatedRoute.snapshot.paramMap.get('id')!)
-            
-}
+            this.courseListService.retrieveById(+this.activatedRoute.snapshot.paramMap.get('id')!).subscribe({
+                next: course => this.course = course,
+                error: err => console.log('Error', err)
+            });
+        }
+        save() : void{
+            this.courseListService.save(this.course).subscribe({
+                next: course => console.log('Saved with success', course),
+                error: err => console.log('Error', err)
+            });
+        }
+    
     }
